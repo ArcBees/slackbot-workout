@@ -3,11 +3,8 @@
   "channelName": "general",
   "channelId": "channelIdHere",
 
-  "officeHours": {
-    "on": false,
-    "begin": 9,
-    "end": 17
-   },
+  "days": [0, 1, 2, 3, 4],
+  "hours": [[9, 12], [13, 17]],
 
   "debug": false,
 
@@ -18,7 +15,6 @@
       "units": "minutes"
     },
     "numPeople": 3,
-    "slidingWindowSize": 8,
     "groupCalloutChance": 0.05
   },
 
