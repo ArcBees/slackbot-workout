@@ -20,7 +20,7 @@ channelName = sys.argv[1]
 params = {"token": USER_TOKEN_STRING}
 
 # Capture Response as JSON
-response = requests.get("http://slack.com/api/channels.list", params=params)
+response = requests.get("https://slack.com/api/channels.list", params=params)
 channels = json.loads(response.text, encoding='utf-8')["channels"]
 
 for channel in channels:

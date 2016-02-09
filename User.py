@@ -41,7 +41,7 @@ class User:
 
     def fetch_names(self):
         params = {"token": USER_TOKEN_STRING, "user": self.id}
-        response = requests.get("http://slack.com/api/users.info", params=params)
+        response = requests.get("https://slack.com/api/users.info", params=params)
         user_obj = json.loads(response.text, encoding='utf-8')["user"]
 
         username = user_obj["name"]

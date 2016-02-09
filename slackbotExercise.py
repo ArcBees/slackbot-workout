@@ -61,7 +61,7 @@ class Bot:
 
             self.debug = settings["debug"]
 
-        self.post_URL = "http://" + self.team_domain + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
+        self.post_URL = "https://" + self.team_domain + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
 
 
 ################################################################################
@@ -178,7 +178,7 @@ Fetches a list of all users in the channel
 def fetch_users(bot):
     # Check for new members
     params = {"token": USER_TOKEN_STRING, "channel": bot.channel_id}
-    response = requests.get("http://slack.com/api/channels.info", params=params)
+    response = requests.get("https://slack.com/api/channels.info", params=params)
     user_ids = json.loads(response.text, encoding='utf-8')["channel"]["members"]
 
     users = []
