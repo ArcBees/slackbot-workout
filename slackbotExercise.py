@@ -61,7 +61,7 @@ class Bot:
 
             self.debug = settings["debug"]
 
-        self.post_URL = "https://" + self.team_domain + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
+        self.post_URL = "http://" + self.team_domain + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
 
 
 ################################################################################
@@ -79,7 +79,7 @@ def prepare_next_exercise(bot):
     exercise = draw_exercise(bot)
 
     # Announcement String of next lottery time
-    lottery_announcement = "NEXT LOTTERY FOR " + exercise["name"].upper() + " IS IN " + str(minute_interval) \
+    lottery_announcement = "NEXT LOTTERY FOR " + exercise["name"].upper() + " IS IN " + str(int(minute_interval)) \
                            + (" MINUTES" if minute_interval != 1 else " MINUTE")
 
     # Announce the exercise to the thread
@@ -178,7 +178,7 @@ Fetches a list of all users in the channel
 def fetch_users(bot):
     # Check for new members
     params = {"token": USER_TOKEN_STRING, "channel": bot.channel_id}
-    response = requests.get("https://slack.com/api/channels.info", params=params)
+    response = requests.get("http://slack.com/api/channels.info", params=params)
     user_ids = json.loads(response.text, encoding='utf-8')["channel"]["members"]
 
     users = []
