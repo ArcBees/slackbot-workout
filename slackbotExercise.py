@@ -4,7 +4,6 @@ import requests
 import json
 import csv
 import os
-from random import shuffle
 import pickle
 import os.path
 import datetime
@@ -250,14 +249,16 @@ def main():
     bot = Bot()
 
     try:
+        bot.load_configuration()
+        exercise = draw_exercise(bot)
+        assign_exercise(bot, exercise)
+
         while True:
             if is_valid_datetime(bot):
                 bot.load_configuration()
                 exercise = prepare_next_exercise(bot)
                 assign_exercise(bot, exercise)
-
             else:
-                print('Invalid date time')
                 if not bot.debug:
                     time.sleep(5 * 60)
                 else:
