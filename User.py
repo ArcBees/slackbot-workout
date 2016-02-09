@@ -50,7 +50,7 @@ class User:
         return username, real_name
 
     def get_user_handle(self):
-        return ("@" + self.username).encode('utf-8')
+        return "@" + self.username
 
     def add_exercise(self, exercise, reps):
         # Add to total counts
