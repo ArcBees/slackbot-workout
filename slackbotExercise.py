@@ -10,6 +10,8 @@ import pickle
 import os.path
 import datetime
 
+import sys
+
 from User import User
 
 # Environment variables must be set with your tokens
@@ -30,15 +32,6 @@ class Bot:
         # maps userIds to usernames
         self.user_cache = self.load_user_cache()
 
-    def load_user_cache(self):
-        if os.path.isfile('user_cache.save'):
-            with open('user_cache.save', 'rb') as f:
-                self.user_cache = pickle.load(f)
-                print("Loading " + str(len(self.user_cache)) + " users from cache.")
-                return self.user_cache
-
-        return {}
-
     '''
     Sets the configuration file.
 
@@ -46,7 +39,7 @@ class Bot:
     '''
 
     def load_configuration(self):
-        # Read variables fromt the configuration file
+        # Read variables from the configuration file
         with open('config.json') as f:
             settings = json.load(f)
 
@@ -64,6 +57,15 @@ class Bot:
             self.debug = settings["debug"]
 
         self.post_URL = "https://" + self.team_domain + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
+
+    def load_user_cache(self):
+        if os.path.isfile('user_cache.save'):
+            with open('user_cache.save', 'rb') as f:
+                self.user_cache = pickle.load(f)
+                print("Loading " + str(len(self.user_cache)) + " users from cache.", flush=True)
+                return self.user_cache
+
+        return {}
 
 
 ################################################################################
@@ -87,7 +89,7 @@ def prepare_next_exercise(bot):
     # Announce the exercise to the thread
     if not bot.debug:
         requests.post(bot.post_URL, data=lottery_announcement)
-    print(lottery_announcement)
+    print(lottery_announcement, flush=True)
 
     # Sleep the script until time is up
     if not bot.debug:
@@ -157,7 +159,7 @@ def assign_exercise(bot, exercise):
     # Announce the user
     if not bot.debug:
         requests.post(bot.post_URL, data=winner_announcement)
-    print(winner_announcement)
+    print(winner_announcement, flush=True)
 
 
 '''
@@ -227,7 +229,7 @@ def save_users(bot):
 
     if not bot.debug:
         requests.post(bot.post_URL, data=s)
-    print(s)
+    print(s, flush=True)
 
     # write to file
     with open('user_cache.save', 'wb') as f:
@@ -249,6 +251,7 @@ def is_valid_datetime(bot):
 
 def main():
     bot = Bot()
+    saved = True
 
     try:
         bot.load_configuration()
@@ -260,14 +263,21 @@ def main():
                 bot.load_configuration()
                 exercise = prepare_next_exercise(bot)
                 assign_exercise(bot, exercise)
+                saved = False
             else:
+                if not saved:
+                    save_users(bot)
+                    saved = True
+
                 if not bot.debug:
-                    time.sleep(5 * 60)
+                    time.sleep(300)
                 else:
                     time.sleep(5)
 
     except KeyboardInterrupt:
         save_users(bot)
+    except:
+        print('Unexpected error: ', sys.exc_info()[0], file=sys.stderr, flush=True)
 
 
 main()
