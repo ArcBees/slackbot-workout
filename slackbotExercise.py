@@ -81,7 +81,7 @@ def prepare_next_exercise(bot):
     exercise = draw_exercise(bot)
 
     # Announcement String of next lottery time
-    lottery_announcement = "NEXT LOTTERY FOR " + exercise["name"].upper() + " IS IN " + str(int(minute_interval)) \
+    lottery_announcement = "NEXT LOTTERY IS IN " + str(int(minute_interval)) \
                            + (" MINUTES" if minute_interval != 1 else " MINUTE")
 
     # Announce the exercise to the thread
