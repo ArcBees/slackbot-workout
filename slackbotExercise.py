@@ -143,12 +143,13 @@ def assign_exercise(bot, exercise):
 
     else:
         winners = draw_users(bot)
+        range_upper = min(bot.num_people_per_callout, len(winners))
 
-        for i in range(bot.num_people_per_callout):
+        for i in range(range_upper):
             winner_announcement += str(winners[i].get_user_handle())
-            if i == bot.num_people_per_callout - 2:
+            if i == range_upper - 2:
                 winner_announcement += ", and "
-            elif i == bot.num_people_per_callout - 1:
+            elif i == range_upper - 1:
                 winner_announcement += "!"
             else:
                 winner_announcement += ", "
@@ -276,8 +277,6 @@ def main():
 
     except KeyboardInterrupt:
         save_users(bot)
-    except:
-        print('Unexpected error: ', sys.exc_info()[0], file=sys.stderr, flush=True)
 
 
 main()
