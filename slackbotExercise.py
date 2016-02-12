@@ -239,7 +239,7 @@ def is_valid_datetime(bot):
         return False
 
     for start, stop in bot.hours:
-        if start <= now.hour <= stop:
+        if start <= now.hour < stop:
             return True
 
     return False
