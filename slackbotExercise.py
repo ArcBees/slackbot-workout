@@ -117,6 +117,9 @@ Selects the next time interval
 
 
 def draw_next_time_interval(bot):
+    if bot.min_countdown == bot.max_countdown:
+        return bot.min_countdown * 60
+
     return random.randrange(bot.min_countdown * 60, bot.max_countdown * 60)
 
 
