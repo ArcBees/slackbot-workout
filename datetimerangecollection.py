@@ -6,22 +6,22 @@ class DateTimeRangeCollection:
     def __init__(self, settings):
         self.settings = settings
 
-    def draw_minutes(self):
+    def draw_seconds(self):
         today = datetime.today()
         start, stop = self.next_range()
-        min_minutes = self.settings.callout_min_time
-        max_minutes = self.settings.callout_max_time
+        min_seconds = self.settings.callout_min_time * 60
+        max_seconds = self.settings.callout_max_time * 60
 
-        if stop < today + timedelta(minutes=max_minutes):
-            max_minutes = (stop - today).total_seconds() / 60
+        if stop < today + timedelta(seconds=max_seconds):
+            max_seconds = (stop - today).total_seconds()
 
         if today < start:
-            return (start - today).total_seconds() / 60
-        elif max_minutes <= min_minutes:
+            return (start - today).total_seconds() + 1
+        elif max_seconds <= min_seconds:
             # Let's squeeze an extra exercise before the end of the current range :p
-            return max_minutes
+            return max_seconds
         else:
-            return random.randrange(min_minutes, max_minutes)
+            return random.randrange(min_seconds, max_seconds + 1)
 
     def next_range(self):
         next_range = self.next_range_today()
@@ -42,7 +42,7 @@ class DateTimeRangeCollection:
                 start = datetime(today.year, today.month, today.day, hour_start)
                 stop = datetime(today.year, today.month, today.day, hour_stop)
 
-                if start <= today < stop:
+                if start <= today < stop or today < start:
                     return start, stop
 
         return None

@@ -10,7 +10,7 @@ from callout import CallOut
 from datetimerangecollection import DateTimeRangeCollection
 from exercisecollection import ExerciseCollection
 from settings import Settings
-from usercollection import UserCollection
+from user import UserCollection
 
 
 class Bot:
@@ -33,7 +33,7 @@ class Bot:
         self.users.reload()
 
     def wait(self):
-        wait_seconds = int(self.date_time_ranges.draw_minutes()) * 60
+        wait_seconds = int(self.date_time_ranges.draw_seconds())
         today = datetime.today()
         next_draw = today + timedelta(seconds=wait_seconds)
 
@@ -51,7 +51,7 @@ class Bot:
 
     def call_out_if_in_range(self):
         today = datetime.today()
-        start, stop = self.date_time_ranges.next_range()
+        start, stop = self.date_time_ranges.next_range_today()
 
         if start <= today <= stop:
             self.call_out()
