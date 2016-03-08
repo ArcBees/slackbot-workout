@@ -18,8 +18,9 @@ class Settings:
 
     @property
     def post_url(self):
-        return "https://" + self.team_domain() + ".slack.com/services/hooks/slackbot?token=" + URL_TOKEN_STRING \
-               + "&channel=" + HASH + self.channel_name()
+        url = "https://" + self.team_domain + ".slack.com/services/hooks/slackbot"
+        url += "?token=" + URL_TOKEN_STRING + "&channel=" + HASH + self.channel_name
+        return url
 
     @property
     def is_debug(self):
