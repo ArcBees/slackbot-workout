@@ -9,7 +9,7 @@ class CallOut:
         self.users = users
 
     def publish(self):
-        message = str(self.reps) + " " + self.exercise["units"] + " " + self.exercise["name"] + " RIGHT NOW "
+        message = str(self.reps) + " " + self.exercise["units"] + " " + self.exercise["name"] + " MAINTENANT "
         message += self.format_handles(self.users)
 
         if not self.settings.is_debug:
@@ -23,7 +23,7 @@ class CallOut:
         for i in range(count):
             result += handles[i]
             if i == count - 2:
-                result += " and "
+                result += " et "
             elif i == count - 1:
                 result += "!"
             else:
