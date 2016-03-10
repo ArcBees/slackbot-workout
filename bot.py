@@ -40,7 +40,7 @@ class Bot:
 
         locale.setlocale(locale.LC_ALL, 'fr_CA.utf8')
 
-        message = "LA PROCHAINE LOTTERIE EST"
+        message = "LA PROCHAINE LOTERIE EST"
         if next_draw.day != today.day:
             message += " LE " + next_draw.strftime("%A, %b %d")
         message += " À " + next_draw.strftime("%H:%M")
