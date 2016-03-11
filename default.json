@@ -21,35 +21,35 @@
   "exercises": [
     {
       "id": 0,
-      "name": "pushups",
+      "name": "push-ups",
       "minReps": 15,
       "maxReps": 20,
       "units": "rep"
     },
     {
       "id": 1,
-      "name": "planks",
+      "name": "planche",
       "minReps": 40,
       "maxReps": 60,
       "units": "second"
     },
     {
       "id": 2,
-      "name": "wall sit",
+      "name": "faire la chaise",
       "minReps": 40,
       "maxReps": 50,
       "units": "second"
     },
     {
       "id": 3,
-      "name": "chair dips",
+      "name": "dips sur une chaise",
       "minReps": 15,
       "maxReps": 30,
       "units": "rep"
     },
     {
       "id": 4,
-      "name": "calf raises",
+      "name": "extension des mollets",
       "minReps": 20,
       "maxReps": 30,
       "units": "rep"

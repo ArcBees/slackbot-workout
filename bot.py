@@ -5,6 +5,7 @@ import time
 from datetime import datetime, timedelta
 
 import requests
+import locale
 
 from callout import CallOut
 from datetimerangecollection import DateTimeRangeCollection
@@ -37,10 +38,12 @@ class Bot:
         today = datetime.today()
         next_draw = today + timedelta(seconds=wait_seconds)
 
-        message = "NEXT LOTTERY IS"
+        locale.setlocale(locale.LC_ALL, 'fr_CA.utf8')
+
+        message = "LA PROCHAINE LOTERIE EST"
         if next_draw.day != today.day:
-            message += " ON " + next_draw.strftime("%A, %b %d")
-        message += " AT " + next_draw.strftime("%H:%M")
+            message += " LE " + next_draw.strftime("%A, %b %d")
+        message += " À " + next_draw.strftime("%H:%M")
 
         print(message)
         if not self.settings.is_debug:
