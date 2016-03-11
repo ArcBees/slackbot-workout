@@ -35,7 +35,7 @@
     },
     {
       "id": 2,
-      "name": "assis au mur",
+      "name": "faire la chaise",
       "minReps": 40,
       "maxReps": 50,
       "units": "second"
@@ -49,7 +49,7 @@
     },
     {
       "id": 4,
-      "name": "mollets",
+      "name": "extension des mollets",
       "minReps": 20,
       "maxReps": 30,
       "units": "rep"
